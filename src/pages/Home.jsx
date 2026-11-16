@@ -22,29 +22,56 @@ const Home = ({ history, onNavigate, onOpenSettings }) => {
         </section>
 
         <section className="grid grid-cols-2 gap-3 py-5 lg:grid-cols-3 lg:gap-4">
+
           <button
-            className="col-span-2 h-32 rounded-3xl border-0 p-5 text-left lg:col-span-1 lg:h-44"
+            className="col-span-2 h-32 rounded-3xl border-0 px-5 py-4 text-left lg:col-span-1 lg:h-44 relative overflow-hidden flex flex-col justify-center"
             style={{ background: "var(--accent)", color: "var(--on-accent)", cursor: "pointer" }}
             onClick={() => onNavigate("scan")}
           >
-            <Icon name="qr_code_scanner" fill size={30} />
-            <div className="mt-2 text-2xl font-extrabold">Scan QR</div>
-            <div className="text-sm opacity-90">Camera or image from gallery</div>
-          </button>
-
-          <button className="card h-[104px] p-4 text-left lg:h-44" style={{ cursor: "pointer", color: "var(--text)" }} onClick={() => onNavigate("create")}>
-            <div className="text-lg font-extrabold">Create QR</div>
-            <div className="muted mt-1 text-[13px]">Text, URL, Wi-Fi</div>
+            <div className="relative z-10 pr-24 lg:pr-36">
+              <Icon name="qr_code_scanner" fill size={30} />
+              <div className="mt-2 text-xl lg:text-2xl font-extrabold">Scan QR</div>
+              <div className="text-xs lg:text-sm opacity-90 whitespace-nowrap">Camera or image from gallery</div>
+            </div>
+            <img 
+              src="/QR_Code_pana.svg" 
+              alt="Scan QR Illustration" 
+              className="absolute right-4 top-1/2 -translate-y-1/2 h-full max-h-30 lg:max-h-32 object-contain pointer-events-none opacity-90" 
+            />
           </button>
 
           <button
-            className="card h-[104px] p-4 text-left lg:h-44"
+            className="card h-[104px] px-4 py-3 text-left lg:h-44 relative overflow-hidden flex flex-col justify-center"
+            style={{ cursor: "pointer", color: "var(--text)", borderColor: "var(--accent)" }}
+            onClick={() => onNavigate("create")}
+          >
+            <div className="relative z-10 pr-24 lg:pr-36">
+              <div className="accent text-base lg:text-lg font-extrabold whitespace-nowrap">Create QR</div>
+              <div className="muted mt-1 text-xs lg:text-[13px] whitespace-nowrap">Text, URL, Wi-Fi</div>
+            </div>
+            <img 
+              src="/Creat_QR_Btn.png" 
+              alt="Create QR Illustration" 
+              className="absolute -right-1 top-1/2 -translate-y-1/2 h-full max-h-20 lg:max-h-32 object-contain pointer-events-none opacity-90" 
+            />
+          </button>
+
+          <button
+            className="card h-[104px] px-4 py-3 text-left lg:h-44 relative overflow-hidden flex flex-col justify-center"
             style={{ cursor: "pointer", color: "var(--text)", borderColor: "var(--accent)" }}
             onClick={() => onNavigate("create", { type: "upi" })}
           >
-            <div className="accent text-lg font-extrabold">UPI Payment</div>
-            <div className="muted mt-1 text-[13px]">ID + amount, split QRs</div>
+            <div className="relative z-10 pr-24 lg:pr-36">
+              <div className="accent text-base lg:text-lg font-extrabold whitespace-nowrap">UPI Payment</div>
+              <div className="muted mt-1 text-xs lg:text-[13px] whitespace-nowrap">ID + amount, split QRs</div>
+            </div>
+            <img 
+              src="/Cash_Payment_bro.svg" 
+              alt="UPI Illustration" 
+              className="absolute -right-2 top-1/2 -translate-y-1/2 h-full max-h-20 lg:max-h-32 object-contain pointer-events-none opacity-90" 
+            />
           </button>
+
         </section>
 
         <section>

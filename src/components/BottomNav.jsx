@@ -23,7 +23,7 @@ const BottomNav = ({ active, onNavigate, onOpenSettings }) => {
   return (
     <nav className="bottom-nav" aria-label="Main">
       <div className="nav-brand">
-        <Icon name="qr_code_2" fill />
+        <img src="/favicon.svg" alt="" width={28} height={28} className="shrink-0" />
         <span className="nav-label">QR Kantha</span>
       </div>
 

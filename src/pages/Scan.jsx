@@ -149,17 +149,24 @@ const Scan = ({ settings, onNavigate, onOpenSettings, onScanResult }) => {
 
       <main className="mx-auto max-w-md lg:grid lg:max-w-6xl lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start lg:gap-8 lg:px-8">
         {/* camera area */}
-        <section className="relative h-[min(52dvh,430px)] overflow-hidden lg:h-[min(72dvh,620px)] lg:rounded-3xl" style={{ background: "#05060a" }}>
+        {/* Camera off: use the theme colours. Camera on: black behind the live video. */}
+<section
+          className="relative h-[min(52dvh,430px)] overflow-hidden lg:h-[min(72dvh,620px)] lg:rounded-3xl"
+          style={{ background: scanning ? "#05060a" : "var(--surface)", borderBottom: "1px solid var(--border)", transition: "background-color .25s" }}
+        >
           <video ref={videoRef} playsInline muted className="absolute inset-0 h-full w-full object-cover" style={{ opacity: scanning ? 0.9 : 0.25 }} />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-[55%]" style={{ width: 260, height: 260 }}>
-            {CORNERS.map((c, i) => (
-              <div key={i} className="absolute" style={{ width: 44, height: 44, borderStyle: "solid", borderColor: "var(--accent)", ...c }} />
-            ))}
-            {scanning && (
-              <div className="absolute left-3 right-3" style={{ height: 2, background: "var(--accent)", boxShadow: "0 0 12px var(--accent)", animation: "scanline 2s linear infinite" }} />
-            )}
-          </div>
-          <p className="absolute bottom-6 left-0 right-0 m-0 text-center text-sm" style={{ color: "#a3a9bb" }}>
+          
+          {!scanning && (
+            <div className="w-full h-full relative pb-12">
+              <img 
+                src="/QR%20Code-bro.svg" 
+                alt="QR Code Illustration" 
+                className="w-full h-full object-contain" 
+              />
+            </div>
+          )}
+          
+          <p className="absolute bottom-4 left-0 right-0 m-0 text-center text-sm z-10" style={{ color: scanning ? "#d7dbe8" : "var(--muted)" }}>
             {scanning ? "Point the camera at a QR code" : "Tap Start scan to turn on the camera"}
           </p>
         </section>

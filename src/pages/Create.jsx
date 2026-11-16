@@ -378,14 +378,11 @@ const Create = ({
                 </div>
               )}
 
-              <div className="flex items-center justify-center rounded-2xl p-4" style={{ background: "#fff", aspectRatio: "1 / 1" }}>
+              <div className="flex items-center justify-center rounded-2xl p-4" style={{ aspectRatio: "1 / 1" }}>
                 {qr ? (
                   <img src={qr} alt="Generated QR code" className="h-full w-full object-contain" />
                 ) : (
-                  <div className="flex flex-col items-center gap-2" style={{ color: "#8b90a0" }}>
-                    <Icon name="qr_code_2" size={72} />
-                    <span className="text-xs font-semibold">Your QR code will appear here</span>
-                  </div>
+                  <img src="/QR_Create.svg" alt="Create QR Illustration" className="h-full w-full object-contain" />
                 )}
               </div>
 
