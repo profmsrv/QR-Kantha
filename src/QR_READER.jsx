@@ -100,7 +100,7 @@ const QR_READER = () => {
         />
       )}
       {page === "history" && (
-        <History history={history} onNavigate={navigate} onOpenSettings={() => setSettingsOpen(true)} onClear={clearHistory} onRemove={removeHistory} />
+        <History history={history} onNavigate={navigate} onOpenSettings={() => setSettingsOpen(true)} onClear={clearHistory} onRemove={removeHistory} onUpdateHistory={updateHistory} />
       )}
 
       <Settings

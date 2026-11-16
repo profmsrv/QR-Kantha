@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import Icon from "../components/Icon";
 import BottomNav from "../components/BottomNav";
+import HistoryDetail from "../components/HistoryDetail";
 import { copyValue, describeItem } from "../utils/qrData";
 
 const FILTERS = [
@@ -24,12 +25,12 @@ const dayGroup = (ts) => {
   return days <= 0 ? "Today" : days === 1 ? "Yesterday" : "Earlier";
 };
 
-const formatLink = (url) => (/^https?:\/\//i.test(url) ? url : `https://${url}`);
-
-const History = ({ history, onNavigate, onOpenSettings, onClear, onRemove }) => {
+const History = ({ history, onNavigate, onOpenSettings, onClear, onRemove, onUpdateHistory }) => {
   const [filter, setFilter] = useState("all");
   const [query, setQuery] = useState("");
   const [copiedId, setCopiedId] = useState(null);
+  const [selectedId, setSelectedId] = useState(null); // entry whose details are open
+  const selected = history.find((h) => h.id === selectedId);
 
   const handleCopy = async (item) => {
     try {
@@ -96,19 +97,21 @@ const History = ({ history, onNavigate, onOpenSettings, onClear, onRemove }) => 
                   const unpaid = item.parts ? item.parts.some((p) => !p.paid) : false;
                   return (
                     <div key={item.id} className="card flex items-center gap-3 p-3">
-                      <span className="tag">{d.tag}</span>
-                      <div className="min-w-0 flex-1">
-                        <div className="truncate text-[15px] font-extrabold">
-                          {d.type === "url" ? (
-                            <a href={formatLink(d.payload)} target="_blank" rel="noopener noreferrer" className="accent no-underline">{d.title}</a>
-                          ) : (
-                            d.title
-                          )}
-                        </div>
-                        <div className="muted text-[13px]">
-                          {d.verb}, {d.time}{d.extra ? `, ${d.extra}` : ""}
-                        </div>
-                      </div>
+                      {/* tapping the row opens the full details with the QR code */}
+                      <button
+                        className="flex min-w-0 flex-1 items-center gap-3 border-0 bg-transparent p-0 text-left"
+                        style={{ cursor: "pointer", color: "var(--text)", minHeight: 44 }}
+                        aria-label={`Open details for ${d.title}`}
+                        onClick={() => setSelectedId(item.id)}
+                      >
+                        <span className="tag">{d.tag}</span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-[15px] font-extrabold">{d.title}</span>
+                          <span className="muted block text-[13px]">
+                            {d.verb}, {d.time}{d.extra ? `, ${d.extra}` : ""}
+                          </span>
+                        </span>
+                      </button>
 
                       {unpaid && (
                         <button className="btn btn-primary" style={{ minHeight: 36, padding: "0 12px" }} onClick={() => onNavigate("create", { planId: item.id })}>
@@ -129,6 +132,16 @@ const History = ({ history, onNavigate, onOpenSettings, onClear, onRemove }) => 
           ))
         )}
       </main>
+
+      {selected && (
+        <HistoryDetail
+          item={selected}
+          onClose={() => setSelectedId(null)}
+          onNavigate={onNavigate}
+          onUpdateHistory={onUpdateHistory}
+          onRemove={onRemove}
+        />
+      )}
 
       <BottomNav active="history" onNavigate={onNavigate} onOpenSettings={onOpenSettings} />
     </div>

@@ -73,3 +73,10 @@ export function splitByMax(total, max) {
   if (rest > 0) parts.push(rest);
   return parts;
 }
+
+// The UPI link for part `i` of a saved payment plan (same note format the Create screen uses).
+export function buildPartLink(upi, parts, i) {
+  const n = parts.length;
+  const note = n > 1 ? `${upi.note || "Payment"} (${i + 1}/${n})` : upi.note;
+  return buildUpiLink({ pa: upi.pa, pn: upi.pn, paise: parts[i]?.amount, note });
+}
