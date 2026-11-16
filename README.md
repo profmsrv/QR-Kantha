@@ -1,6 +1,6 @@
 # QR Kantha
 
-## Using ACCOUNT - Claude - masrvasupalli177@gmail
+## AI assist ACCOUNT - Claude/masrvasupalli177
 
 React + Vite + Tailwind PWA. Scan QR codes, create QR codes (text, URL, Wi-Fi, contact) and UPI payment QRs
 that split large amounts into smaller parts with manual "mark as paid" tracking.
