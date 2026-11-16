@@ -20,8 +20,6 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:Manrope,sans-serif;transition:background-color .25s,color .25s}
 button,input,textarea,select{font-family:inherit}
-.material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;user-select:none}
-.icon-fill{font-variation-settings:'FILL' 1,'wght' 400,'GRAD' 0,'opsz' 24}
 
 .qr-page{min-height:100dvh;padding-bottom:7rem}
 .app-header{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:4px;height:64px;padding:0 12px;background:var(--bg)}
